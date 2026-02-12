@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 
 import authRoutes from './routes/authRoutes';
 import studentRoutes from './routes/studentRoutes';
+import dashboardRoutes from './routes/dashboardRoutes';
 dotenv.config();
 
 const app = express();
@@ -14,10 +15,16 @@ app.use(cors());
 app.use(express.json());     
 app.use('/auth', authRoutes);
 app.use('/api', studentRoutes);
+app.use('/api', dashboardRoutes);
+
 app.get('/', (req, res) => {
   res.send(' API est en ligne !');
 });
 
-app.listen(PORT, () => {
-  console.log(`Serveur démarré sur http://localhost:${PORT}`);
-});
+export default app;
+
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(` Serveur démarré sur http://localhost:${PORT}`);
+  });
+}
