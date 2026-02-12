@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import authRoutes from './routes/authRoutes';
 import studentRoutes from './routes/studentRoutes';
 import dashboardRoutes from './routes/dashboardRoutes';
+import iotRoutes from './routes/iotRoutes';
 dotenv.config();
 
 const app = express();
@@ -16,7 +17,7 @@ app.use(express.json());
 app.use('/auth', authRoutes);
 app.use('/api', studentRoutes);
 app.use('/api', dashboardRoutes);
-
+app.use('/api', iotRoutes);
 app.get('/', (req, res) => {
   res.send(' API est en ligne !');
 });
