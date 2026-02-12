@@ -4,39 +4,48 @@ import { relations, sql } from 'drizzle-orm';
 export const superviseurs = mysqlTable('Superviseurs', {
   id: int('Id_superviseur').primaryKey().autoincrement(),
   email: varchar('email', { length: 40 }).notNull().unique(),
-  password: varchar('pass_word', { length: 100 }).notNull(), 
+  password: varchar('pass_word', { length: 100 }).notNull(),
   name: varchar('name', { length: 20 }).notNull(),
 });
 
 export const students = mysqlTable('Students', {
   id: int('Id_student').primaryKey().autoincrement(),
-  superviseurId: int('Id_superviseur').notNull(), 
+  
+  superviseurId: int('Id_superviseur')
+    .notNull()
+    .references(() => superviseurs.id, { onDelete: 'cascade' }),
+    
   name: varchar('name', { length: 20 }).notNull(),
   nfcUid: varchar('nfc_uid', { length: 40 }).unique(),
 });
 
 export const sessions = mysqlTable('Sessions', {
   id: int('Id_session').primaryKey().autoincrement(),
-  studentId: int('Id_student').notNull(), 
+  
+  studentId: int('Id_student')
+    .notNull()
+    .references(() => students.id, { onDelete: 'cascade' }),
   
   startTime: datetime('start_time').default(sql`CURRENT_TIMESTAMP`),
   endTime: datetime('end_time'),
   
   status: varchar('status', { length: 20 }).default('Active'),
-  macAddress: varchar('mac_adresse', { length: 50 }).notNull(), 
+  macAddress: varchar('mac_adresse', { length: 50 }).notNull(),
   timeWorked: int('time_worked').default(0),
 });
 
 export const issues = mysqlTable('issues', {
   id: int('Id_issue').primaryKey().autoincrement(),
-  sessionId: int('Id_session').notNull(), 
+  
+  sessionId: int('Id_session')
+    .notNull()
+    .references(() => sessions.id, { onDelete: 'cascade' }),
   
   startAbsence: datetime('start_absence').default(sql`CURRENT_TIMESTAMP`),
   endAbsence: datetime('end_absence'),
   durationSecond: int('duration_second').default(0),
 });
 
-// --- Sugerer par L'IA : RELATIONS (Pour faciliter les requêtes "Join" plus tard) ---
 
 export const superviseursRelations = relations(superviseurs, ({ many }) => ({
   students: many(students),
