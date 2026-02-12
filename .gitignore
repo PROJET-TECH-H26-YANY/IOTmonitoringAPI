@@ -1,0 +1,54 @@
+# Dépendances
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Runtime
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Build / dist
+dist/
+build/
+out/
+
+# Cache
+.cache/
+.tmp/
+.npm/
+.eslintcache
+
+# Environnement
+.env
+.env.*
+!.env.example
+
+# Couverture de tests
+coverage/
+
+# IDE / OS
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# TypeScript
+*.tsbuildinfo
+
+# Next / Nuxt / Vite
+.next/
+.nuxt/
+.vite/
+
+# Misc
+*.tgz
