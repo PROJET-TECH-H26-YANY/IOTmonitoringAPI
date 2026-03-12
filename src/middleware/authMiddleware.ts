@@ -5,7 +5,7 @@ interface TokenPayload {
   id: number;
   email: string;
 }
-// code recupéré de l'ancienne session et adapté pour le projet
+// code est récupéré de l'ancienne session et adapté pour le projet
 export interface AuthRequest extends Request {
   user?: TokenPayload;
 }

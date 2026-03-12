@@ -12,7 +12,10 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 
-app.use(cors());             
+app.use(cors({
+origin: ['http://localhost:8081', 'exp://192.168.1.x:8081'],
+credentials: true,
+}));            
 app.use(express.json());     
 app.use('/auth', authRoutes);
 app.use('/api', studentRoutes);

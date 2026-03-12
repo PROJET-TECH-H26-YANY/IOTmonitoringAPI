@@ -1,6 +1,33 @@
 # présenation
 Auteur : *Yany Boudedja* / Cours : IOT 
 Ce projet constitue l'API Backend et le service IoT pour la gestion automatisée de l'assiduité dans les laboratoires. Il sert de pont entre les objets connectés (ESP32) et l'interface de gestion des professeurs.
+## setup le serveur
+```
+apt update && apt upgrade -y
+apt install curl wget git unzip -y
+
+adduser deploy
+usermod -aG sudo deploy
+
+curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+sudo apt install nodejs -y
+
+
+sudo apt install mariadb-server mariadb-client -y
+
+```
+-MariaDB Config
+
+```sql
+CREATE DATABASE IotMonitoring CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+CREATE USER 'deploy'@'localhost' IDENTIFIED BY '1';
+
+GRANT ALL PRIVILEGES ON IotMonitoring.* TO 'deploy'@'localhost';
+
+FLUSH PRIVILEGES;
+EXIT; 
+```
 
 ## Initialisation & Installation
 ```
@@ -21,12 +48,10 @@ npm install -D typescript ts-node nodemon drizzle-kit @types/node @types/express
 PORT=3000
 # Database
 DB_HOST=localhost
-DB_USER=root
+DB_USER=ton_utilisateur
 DB_PASS=ton_mot_de_passe
 DB_NAME=smart_attendance_db
 
-# MQTT (Public pour test ou ton VPS)
-MQTT_BROKER_URL=mqtt://test.mosquitto.org
 
 ```
 # configurer 
