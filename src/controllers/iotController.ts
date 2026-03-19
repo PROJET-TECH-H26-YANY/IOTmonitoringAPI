@@ -20,6 +20,7 @@ export class IotController {
           success: true,
           command: 'LED_ON_100',
           student: result.studentName,
+          studentId: result.studentId,
           message: 'Session ouverte'
         });
       } else {
@@ -27,6 +28,7 @@ export class IotController {
           success: true,
           command: 'LED_OFF',
           student: result.studentName,
+          studentId: result.studentId,
           message: 'Session fermée'
         });
       }

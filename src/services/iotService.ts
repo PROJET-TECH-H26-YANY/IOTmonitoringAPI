@@ -28,15 +28,15 @@ export class IotService {
     if (activeSession) {
       if (activeSession.studentId === student.id) {
         await this.closeActiveSession(activeSession);
-        return { type: 'LOGOUT', studentName: student.name };
+        return { type: 'LOGOUT', studentName: student.name, studentId: student.id};
       } else {
         await this.closeActiveSession(activeSession);
         await this.repo.createSession(student.id, mac);
-        return { type: 'LOGIN', studentName: student.name };
+        return { type: 'LOGIN', studentName: student.name, studentId: student.id };
       }
     } else {
       await this.repo.createSession(student.id, mac);
-      return { type: 'LOGIN', studentName: student.name };
+      return { type: 'LOGIN', studentName: student.name, studentId: student.id };
     }
   }
 
