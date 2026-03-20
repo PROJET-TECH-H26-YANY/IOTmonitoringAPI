@@ -19,6 +19,7 @@
     "dotenv": "^17.2.3",
     "drizzle-orm": "^0.45.1",
     "express": "^5.2.1",
+    "gel": "^2.2.0",
     "jsonwebtoken": "^9.0.3",
     "mqtt": "^5.14.1",
     "mysql2": "^3.16.2"
@@ -29,7 +30,7 @@
     "@types/express": "^5.0.6",
     "@types/jest": "^30.0.0",
     "@types/jsonwebtoken": "^9.0.10",
-    "@types/node": "^25.1.0",
+    "@types/node": "^25.3.0",
     "@types/supertest": "^6.0.3",
     "drizzle-kit": "^0.31.8",
     "jest": "^30.2.0",

@@ -12,7 +12,12 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 
-app.use(cors());             
+// Remplace app.use(cors()); par ceci :
+app.use(cors({
+  // Ajoute l'URL de ton front local, et éventuellement celle de production plus tard
+  origin: ['http://localhost:8081', 'exp://192.168.1.x:8081'], 
+  credentials: true, // Indispensable pour matcher avec le 'include' de ton front
+}));             
 app.use(express.json());     
 app.use('/auth', authRoutes);
 app.use('/api', studentRoutes);
