@@ -1,5 +1,6 @@
 import { DashboardRepository } from '../repositories/dashboardRepository';
 import { AuthRepository } from '../repositories/authRepository'; 
+import mqtt from 'mqtt';
 
 export class DashboardService {
   private repo: DashboardRepository;
@@ -31,7 +32,27 @@ export class DashboardService {
     }
     const durationSec = Math.floor((endTime.getTime() - session.startTime.getTime()) / 1000);
     
+    // 1. Fermeture dans la base de données
     await this.repo.updateSession(sessionId, endTime, Math.max(0, durationSec - totalPause));
+
+    // 2. NOUVEAU : Envoi du signal d'extinction à l'ESP32 via MQTT
+    const client = mqtt.connect('mqtt://185.53.209.197:1883');
+    
+    client.on('connect', () => {
+      // On utilise l'adresse MAC de la session pour cibler le bon ESP32
+      const topic = `labo/device/${session.macAddress}/command`;
+      
+      // On forge le message JSON d'extinction
+      const payload = JSON.stringify({ 
+        led: 0, 
+        oled: "Fermeture\nForcee" 
+      });
+      
+      client.publish(topic, payload, () => {
+        // On se déconnecte proprement une fois le message envoyé
+        client.end(); 
+      });
+    });
   }
 
   async getProfile(superviseurId: number) {
