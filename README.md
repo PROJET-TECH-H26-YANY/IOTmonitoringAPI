@@ -40,7 +40,7 @@ GRANT ALL PRIVILEGES ON IotMonitoring.* TO 'deploy'@'localhost';
 FLUSH PRIVILEGES;
 EXIT; 
 ```
-
+Le script est dans le fichier init_db.sql
 ## Initialisation & Installation
 ```
 git clone https://github.com/PROJET-TECH-H26-YANY/API_IOTmonitoring.git
