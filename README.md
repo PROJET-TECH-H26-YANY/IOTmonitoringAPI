@@ -131,6 +131,16 @@ npm run build
 pm2 start dist/app.js --name "api-iot"
 ```
 
+# Configuration du Broker MQTT
+Pour permettre la communication entre l'API, Node-RED et les objets connectés (ESP32) :
+1. Éditez le fichier de configuration de Mosquitto :
+```bash
+sudo nano /etc/mosquitto/conf.d/default.conf
+# Ajoutez ces lignes pour écouter sur le port standard et autoriser les connexions :
+listener 1883
+allow_anonymous true
+```
+
 # Structure du Projet
 ```
 Backend/
